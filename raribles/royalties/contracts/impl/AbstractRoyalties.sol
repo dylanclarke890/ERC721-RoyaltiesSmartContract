@@ -20,11 +20,10 @@ abstract contract AbstractRoyalties {
     }
 
     function _updateAccount(uint256 _id, address _from, address _to) internal {
-        uint length = royalties[_id].length;
+        LibPart.Part[] parts = royalties[_id];
+        uint length = parts.length;
         for(uint i = 0; i < length; i++) {
-            if (royalties[_id][i].account == _from) {
-                royalties[_id][i].account = payable(address(uint160(_to)));
-            }
+            if (parts[i].account == _from) parts[i].account = payable(address(uint160(_to)));
         }
     }
 
